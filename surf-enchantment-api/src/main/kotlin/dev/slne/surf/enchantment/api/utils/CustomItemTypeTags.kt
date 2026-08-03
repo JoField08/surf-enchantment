@@ -45,7 +45,8 @@ enum class CustomItemTypeTags(
 
     REPLENISH_KEY(
         key("surf", "items_replenish"),
-        TagEntry.tagEntry(ItemTypeTagKeys.HOES)
+        TagEntry.tagEntry(ItemTypeTagKeys.HOES),
+        TagEntry.tagEntry(ItemTypeTagKeys.AXES)
     ),
 
     ROCKET_RIDE_KEY(

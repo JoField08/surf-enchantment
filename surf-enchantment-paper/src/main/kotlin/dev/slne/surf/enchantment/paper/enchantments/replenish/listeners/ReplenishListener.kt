@@ -9,6 +9,7 @@ import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.block.data.Ageable
 import org.bukkit.block.data.Bisected
+import org.bukkit.block.data.Directional
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -41,7 +42,9 @@ object ReplenishListener : Listener {
         Material.TORCHFLOWER_CROP to (Material.TORCHFLOWER_SEEDS to Material.TORCHFLOWER_CROP),
         Material.TORCHFLOWER to (Material.TORCHFLOWER_SEEDS to Material.TORCHFLOWER_CROP),
 
-        Material.PITCHER_CROP to (Material.PITCHER_POD to Material.PITCHER_CROP)
+        Material.PITCHER_CROP to (Material.PITCHER_POD to Material.PITCHER_CROP),
+
+        Material.COCOA to (Material.COCOA_BEANS to Material.COCOA)
     )
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -84,6 +87,10 @@ object ReplenishListener : Listener {
 
             val newBlockData = blockToPlace.createBlockData { blockData ->
                 if (blockData is Ageable) blockData.age = 0
+
+                if (blockData is Directional && data is Directional) {
+                    blockData.facing = data.facing
+                }
             }
 
             event.block.setBlockData(newBlockData, true)
